@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0">
+	<meta charset="UTF-8">
+	<title>剪刀石头布</title>
+	<style>
+		@font-face{font-family: 'hkhb'; src: url('./hkhb.ttc');}
+		#cvs{width: 100%;height: 100%;font-family: 'hkhb';}
+		#cvs canvas{ width: 100%;height: 100%;vertical-align: middle;position: absolute; }
+		#load{width: 100%;position: absolute;top: 0;left: 0;}
+	</style>
+	<script src="./pixi.min.js"></script>
+	<script src="http://res2.caiguo.com/games/adapter.js"></script>
+</head>
+<body style="margin:0;padding:0;">
+	<div id="cvs">loading...
+		<img id="load" src="./images/load.gif" alt="">
+	</div>
+	<audio id="bgmusic" src="./sound/bg3.mp3" loop="loop"></audio>
+	<script src="./main.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+		function autoPlayAudio() {
+	        wx.config({
+	            // 配置信息, 即使不正确也能使用 wx.ready
+	            debug: false,
+	            appId: '',
+	            timestamp: 1,
+	            nonceStr: '',
+	            signature: '',
+	            jsApiList: []
+	        });
+	        wx.ready(function() {
+	            var globalAudio=document.getElementById("bgmusic");
+	            	globalAudio.play();
+	        });
+		};
+		// 解决ios音乐不自动播放的问题
+		var musicStatu = localStorage.getItem("musicStatu") || 'true';
+		var bgmusic = document.getElementById("bgmusic");
+		if(musicStatu === 'true'){
+			autoPlayAudio();          
+			bgmusic.setAttribute("autoplay","autoplay");
+		}
+
+	</script>
+</body>
+</html>
